@@ -8,14 +8,25 @@ __author__ = "Sidd Karamcheti"
 
 import wpilib
 from grt.sensors.attack_joystick import Attack3Joystick
+from grt.sensors.buttonbard import ButtonBoard
 from grt.core import SensorPoller
 from grt.mechanism.drivetrain import DriveTrain
 from grt.mechanism.drivecontroller import ArcadeDriveController
 
+#Button Board
+bboard = ButtonBoard()
+
+def bBoardListener(sensor, state_id, datum):
+	print(sensor, state_id, datum)
+
+bboard.add_listener(bBoardListener)
+
 # Joysticks
 lstick = Attack3Joystick(1)
 
-sp = SensorPoller((lstick, ))
+sp = SensorPoller((lstick, bboard, ))
+
+
 
 #Solenoids (PINS TENTATIVE)
 #solenoid = wpilib.Solenoid(7, 1)
