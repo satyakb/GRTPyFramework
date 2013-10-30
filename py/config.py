@@ -1,43 +1,81 @@
 """
 Config File for Robot
-
-#TODO: Setup for Constants File
 """
 
 __author__ = "Sidd Karamcheti"
 
 import wpilib
+import thread
+import time
 from grt.sensors.attack_joystick import Attack3Joystick
-from grt.sensors.buttonbard import ButtonBoard
 from grt.core import SensorPoller
-from grt.mechanism.drivetrain import DriveTrain
-from grt.mechanism.drivecontroller import ArcadeDriveController
-
-#Button Board
-bboard = ButtonBoard()
-
-def bBoardListener(sensor, state_id, datum):
-	print(sensor, state_id, datum)
-
-bboard.add_listener(bBoardListener)
 
 # Joysticks
 lstick = Attack3Joystick(1)
 
-sp = SensorPoller((lstick, bboard, ))
+voldemort = wpilib.Solenoid(1)
+
+terminator = wpilib.Solenoid(2)
+
+zombie = wpilib.Solenoid(3)
+door = wpilib.Solenoid(4)
+
+cookiemonster = wpilib.Solenoid(5)
+
+voodoodoll = wpilib.Solenoid(6)
+
+spiderbear = wpilib.Talon(1)
+
+# Mechs:
+# Voldemort, SpiderBear, VoodooDoll, Terminator, ZombieDoor, CookieMonster
 
 
+def delay_actuate(actuator, datum, delaytime):
+    time.sleep(delaytime)
+    actuator.Set(datum)
 
-#Solenoids (PINS TENTATIVE)
-#solenoid = wpilib.Solenoid(7, 1)
 
-#Motors (PINS TENTATIVE)
-lfm = wpilib.Talon(3)
-lrm = wpilib.Talon(4)
-rfm = wpilib.Talon(1)
-rrm = wpilib.Talon(2)
+def vold_listener(source, id, datum):
+    if id == 'trigger' and datum:
+        voldemort.Set(not voldemort.Get())
 
-dt = DriveTrain(lfm, rfm, lrm, rrm)
-dt.set_scale_factors(1, -1, -1, 1)
 
-ac = ArcadeDriveController(dt, lstick)
+def term_listener(source, id, datum):
+    if id == 'button2' and datum:
+        terminator.Set(not terminator.Get())
+
+
+def zomb_listener(source, id, datum):
+    if id == 'button3' and datum:
+        if door.Get() is False:
+            door.Set(True)
+            thread.start_new_thread(delay_actuate, (zombie, True, 2))
+        else:
+            zombie.Set(False)
+            thread.start_new_thread(delay_actuate, (door, True, 2))
+    elif id == 'button10' and datum:
+        door.Set(not door.Get())
+    elif id == 'button11' and datum:
+        zombie.Set(not zombie.Get())
+
+
+def bear_listener(source, id, datum):
+    if id == 'y_axis':
+        spiderbear.Set(datum * 0.25)
+
+
+def cook_listener(source, id, datum):
+    if id == 'button4' and datum:
+        cookiemonster.Set(not cookiemonster.Get())
+
+
+def vood_listener(source, id, datum):
+    if id == 'button5' and datum:
+        voldemort.Set(not voldemort.Get())
+
+for l in (vold_listener, term_listener, zomb_listener,
+          cook_listener, bear_listener):
+    lstick.add_listener(l)
+
+
+sp = SensorPoller((lstick, ))
