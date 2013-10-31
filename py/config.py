@@ -13,16 +13,16 @@ from grt.core import SensorPoller
 # Joysticks
 lstick = Attack3Joystick(1)
 
-voldemort = wpilib.Solenoid(1)
+voldemort = wpilib.Solenoid(6)
 
-terminator = wpilib.Solenoid(2)
+terminator = wpilib.Solenoid(4)
 
-zombie = wpilib.Solenoid(3)
-door = wpilib.Solenoid(4)
+zombie = wpilib.Solenoid(1)
+door = wpilib.Solenoid(7)
 
-cookiemonster = wpilib.Solenoid(5)
+cookiemonster = wpilib.Solenoid(2)
 
-voodoodoll = wpilib.Solenoid(6)
+voodoodoll = wpilib.Solenoid(5)
 
 spiderbear = wpilib.Talon(1)
 
