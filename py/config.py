@@ -5,7 +5,7 @@ Config File for Robot
 __author__ = "Sidd Karamcheti"
 
 import wpilib
-import thread
+from threading import Thread
 import time
 from grt.sensors.attack_joystick import Attack3Joystick
 from grt.core import SensorPoller
@@ -35,6 +35,10 @@ def delay_actuate(actuator, datum, delaytime):
     actuator.Set(datum)
 
 
+def print_listener(source, id, datum):
+    print(id + str(datum))
+
+
 def vold_listener(source, id, datum):
     if id == 'trigger' and datum:
         voldemort.Set(not voldemort.Get())
@@ -49,13 +53,13 @@ def zomb_listener(source, id, datum):
     if id == 'button3' and datum:
         if door.Get() is False:
             door.Set(True)
-            thread.start_new_thread(delay_actuate, (zombie, True, 2))
+            Thread(target=delay_actuate, args=(zombie, True, 2)).start()
         else:
             zombie.Set(False)
-            thread.start_new_thread(delay_actuate, (door, True, 2))
-    elif id == 'button10' and datum:
+            Thread(target=delay_actuate, args=(door, False, 0.5)).start()
+    if id == 'button6' and datum:
         door.Set(not door.Get())
-    elif id == 'button11' and datum:
+    elif id == 'button7' and datum:
         zombie.Set(not zombie.Get())
 
 
@@ -71,10 +75,10 @@ def cook_listener(source, id, datum):
 
 def vood_listener(source, id, datum):
     if id == 'button5' and datum:
-        voldemort.Set(not voldemort.Get())
+        voodoodoll.Set(not voodoodoll.Get())
 
 for l in (vold_listener, term_listener, zomb_listener,
-          cook_listener, bear_listener):
+          cook_listener, bear_listener, vood_listener):
     lstick.add_listener(l)
 
 
