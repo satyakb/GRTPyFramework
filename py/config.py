@@ -9,30 +9,29 @@ __author__ = "Sidd Karamcheti"
 import wpilib
 from grt.sensors.attack_joystick import Attack3Joystick
 from grt.core import SensorPoller
-from grt.mechanism.drivetrain import DriveTrain
-from grt.mechanism.drivecontroller import ArcadeDriveController
-from grt.mechanism.mechs import Mechanisms
+# from grt.mechanism.drivetrain import DriveTrain
+# from grt.mechanism.drivecontroller import ArcadeDriveController
 
 # Joysticks
 lstick = Attack3Joystick(1)
-rstick = Attack3Joystick(2)
+#rstick = Attack3Joystick(2)
 
-sp = SensorPoller((lstick, rstick, ))
+
 
 #Solenoids (PINS TENTATIVE)
 #solenoid = wpilib.Solenoid(7, 1)
 
 #Motors 
-lfm = wpilib.Talon(3)
-lrm = wpilib.Talon(4)
-rfm = wpilib.Talon(1)
-rrm = wpilib.Talon(2)
-shooter_pivot_motor = wpilib.Talon(8)
-flywheel_1 = wpilib.Talon(9)
-flywheel_2 = wpilib.Talon(10
+motor1 = wpilib.Talon(3)
+motor2 = wpilib.Talon(1)
+motor3 = wpilib.Talon(2)
 
-mechs = Mechanisms(rstick, flywheel_1, flywheel_2, shooter_pivot_motor)
-dt = DriveTrain(lfm, rfm, lrm, rrm)
-dt.set_scale_factors(1, -1, 1, -1)
+def motor_listener(source, id, datum):
+	if id == 'y_axis':
+		motor1.Set(datum)
+		motor2.Set(datum)
+		motor3.Set(datum)
 
-ac = ArcadeDriveController(dt, lstick)
+lstick.add_listener(motor_listener)
+
+sp = SensorPoller((lstick, ))
