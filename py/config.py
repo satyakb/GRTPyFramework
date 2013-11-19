@@ -16,8 +16,6 @@ from grt.core import SensorPoller
 lstick = Attack3Joystick(1)
 #rstick = Attack3Joystick(2)
 
-
-
 #Solenoids (PINS TENTATIVE)
 #solenoid = wpilib.Solenoid(7, 1)
 
