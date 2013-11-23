@@ -16,7 +16,7 @@ class Shooter:
 
 	def flywheel_listener(self, source, id, datum):
 		if id == 'button3':
-        		self.running = True
+                        self.running = True
 			if datum:
 				self.flyMotor1.Set(1)
 				self.flyMotor2.Set(1)
