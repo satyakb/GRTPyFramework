@@ -31,7 +31,6 @@ class ArcadeDriveController:
             self.dt.shift(datum)
 
 
-
 class TankDriveController:
     """
     Class for controlling DT in tank drive mode with two joysticks.
