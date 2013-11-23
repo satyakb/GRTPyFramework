@@ -39,9 +39,9 @@ shooter_pivot_motor = wpilib.Victor(8)
 flywheel_1 = wpilib.Talon(9)
 flywheel_2 = wpilib.Talon(10)
 
-belts = wpilib.Victor(7)
+belts = wpilib.Victor(5)
 ep_raiser = wpilib.Victor(6)
-ep_roller = wpilib.Victor(5)
+ep_roller = wpilib.Victor(7)
 
 luna = wpilib.Solenoid(8)
 climber_solenoid = wpilib.Solenoid(7)
