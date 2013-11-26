@@ -1,11 +1,10 @@
 class Climber:
 
-    def __init__(self, joystick, climber):
-        self.joystick = joystick
-        self.climber = climber
+    def __init__(self, climbersolenoid):
+        self.climbersolenoid = climbersolenoid
 
-        self.joystick.add_listener(self.climber_listener)
+    def raiseclimber(self):
+        self.climbersolenoid.Set(True)
 
-    def climber_listener(self, source, id, datum):
-        if id == 'button4':
-            self.climber.Set(datum)
+    def lowerclimber(self):
+        self.climbersolenoid.Set(False)
