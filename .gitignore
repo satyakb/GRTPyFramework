@@ -40,3 +40,4 @@ nosetests.xml
 
 #Pesky Files
 py/grt/grt
+nbproject*
