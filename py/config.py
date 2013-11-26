@@ -9,8 +9,8 @@ __author__ = "Sidd Karamcheti"
 import wpilib
 from grt.sensors.attack_joystick import Attack3Joystick
 from grt.core import SensorPoller
-# from grt.mechanism.drivetrain import DriveTrain
-# from grt.mechanism.drivecontroller import ArcadeDriveController
+from grt.mechanism.drivetrain import DriveTrain
+from grt.mechanism.drivecontroller import ArcadeDriveController
 
 # Joysticks
 lstick = Attack3Joystick(1)
@@ -20,16 +20,26 @@ lstick = Attack3Joystick(1)
 #solenoid = wpilib.Solenoid(7, 1)
 
 #Motors 
-motor1 = wpilib.Talon(3)
-motor2 = wpilib.Talon(1)
-motor3 = wpilib.Talon(2)
+left1 = wpilib.Talon(1)
+left2 = wpilib.Talon(2)
+left3 = wpilib.Talon(3)
 
-def motor_listener(source, id, datum):
-	if id == 'y_axis':
-		motor1.Set(datum)
-		motor2.Set(datum)
-		motor3.Set(datum)
+right1 = wpilib.Talon(4)
+right2 = wpilib.Talon(5)
+right3 = wpilib.Talon(6)
 
-lstick.add_listener(motor_listener)
+lshifter = wpilib.Solenoid(0)
+#rshifter = wpilib.Solenoid(1)
+
+dt =  DriveTrain(left1, right1, left2, right2, left3, right3)
+dt.set_scale_factors(1, -1, 1, -1, 1, -1)
+ac = ArcadeDriveController(dt, lstick)
+
+def shift_listener(sensor, state_id, datum):
+	if state_id == 'trigger':
+		lshifter.Set(datum)
+		#rshifter.Set(datum)
+
+lstick.add_listener(shift_listener)
 
 sp = SensorPoller((lstick, ))
