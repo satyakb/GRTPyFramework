@@ -25,7 +25,7 @@ sp = SensorPoller((lstick, rstick, ))
 #Solenoids (PINS TENTATIVE)
 #solenoid = wpilib.Solenoid(7, 1)
 
-#Motors 
+#Motors
 lfm = wpilib.Talon(3)
 lrm = wpilib.Talon(4)
 rfm = wpilib.Talon(1)
@@ -49,9 +49,9 @@ climber_solenoid = wpilib.Solenoid(7)
 compressor = wpilib.Compressor(1, 1)
 compressor.Start()
 
-climber = Climber(rstick, climber_solenoid)
-shooter = Shooter(rstick, flywheel_1, flywheel_2, shooter_pivot_motor, luna)
-intake = Intake(lstick, belts, ep_roller)
+climber = Climber(climber_solenoid)
+shooter = Shooter(flywheel_1, flywheel_2, shooter_pivot_motor, luna)
+intake = Intake(belts, ep_roller)
 
 dt = DriveTrain(lfm, rfm, lrm, rrm, leftShift, rightShift)
 dt.set_scale_factors(1, -1, 1, -1)
