@@ -24,15 +24,36 @@ class Attack3MechController:
         self.joystick2.add_listener(self._joy2listener)
 
     def _joy1listener(self, sensor, state_id, datum):
+        if id == 'button2':
+            if datum:
+                self.intake.startpickup()
+            else:
+                self.intake.endpickup()
+        elif id == 'button3':
+            if datum:
+                self.intake.kickoutfrisbees()
+            else:
+                self.intake.stopkickoutfrisbees()
+
+
+    def _joy2listener(self, sensor, state_id, datum):
         if state_id == 'button4':
             if datum:
                 self.climber.raiseclimber()
             else:
                 self.climber.lowerclimber()
+        if state_id == 'trigger' and self.joystick2.button3:
+            self.shooter.activateluna()
+        if state_id == 'trigger' and not self.joystick2.button3:
+            self.shooter.deactivateluna()
+        if state_id == 'y_axis':
+            self.shooter.setraiserspeed(datum)
+        if state_id == 'button3':
+            if datum:
+                self.shooter.setflywheelspeed(1)
+            else:
+                self.shooter.setflywheelspeed(0)
 
-
-    def _joy2listener(self, sensor, state_id, datum):
-        pass
 
 
 class XboxMechController:
