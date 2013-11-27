@@ -16,7 +16,7 @@ class DriveTrain:
 
     def __init__(self,
                  left_front_motor, right_front_motor,
-                 left_mid_motor, right_mid_motor
+                 left_mid_motor, right_mid_motor,
                  left_rear_motor, right_rear_motor,
                  left_shifter=None, right_shifter=None,
                  left_encoder=None, right_encoder=None):
@@ -37,7 +37,7 @@ class DriveTrain:
 
     def set_scale_factors(self,
                           left_front_sf, right_front_sf,
-                          left_mid_sf, right_mid_sf
+                          left_mid_sf, right_mid_sf,
                           left_rear_sf, right_rear_sf):
         """
         Depending on robot orientation, drivetrain configuration, controller
