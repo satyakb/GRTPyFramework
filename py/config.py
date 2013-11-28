@@ -14,6 +14,8 @@ from grt.mechanism.drivecontroller import ArcadeDriveController
 from grt.mechanism.climber import Climber
 from grt.mechanism.shooter import Shooter
 from grt.mechanism.intake import Intake
+from grt.mechanism.mechcontroller import Attack3Mechcontroller
+from grt.mechanism.mechcontroller import XboxMechController
 # from grt.mechanism.mechs import Mechanisms
 
 # Joysticks
@@ -56,4 +58,9 @@ intake = Intake(belts, ep_roller)
 dt = DriveTrain(lfm, rfm, lrm, rrm, leftShift, rightShift)
 dt.set_scale_factors(1, -1, 1, -1)
 
+# MechXontrollers:
+
+# Xbox Joystick
+xc = XboxMechController(dt, lstick, rstick, climber, intake, shooter)
+atc = Attack3MechController(lstick, rstick, climber, intake, shooter)
 ac = ArcadeDriveController(dt, lstick)
