@@ -62,5 +62,7 @@ dt.set_scale_factors(1, -1, 1, -1)
 
 # Xbox Joystick
 xc = XboxMechController(dt, lstick, rstick, climber, intake, shooter)
+# Attack3 Joystick
 atc = Attack3MechController(lstick, rstick, climber, intake, shooter)
+#Arcade Drive Controller
 ac = ArcadeDriveController(dt, lstick)
