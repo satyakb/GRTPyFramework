@@ -1,34 +1,41 @@
 """
 Module for various drivetrain control mechanisms.
-Listens to Attack3Joysticks, not wpilib.Joysticks.
+Listens to Attack3Joysticks or XboxJoysticks.
 """
 
 
-class ArcadeDriveController:
+class Attack3MechController:
     """
     Class for controlling DT in arcade drive mode, with one or two joysticks.
     """
 
-    def __init__(self, dt, joystick1, joystick2=None):
+    def __init__(self, joystick1, joystick2, climber, intake, shooter):
         """
         Initialize arcade drive controller with a DT and up to two joysticks.
         """
         self.dt = dt
         self.joystick1 = joystick1
         self.joystick2 = joystick2
-        joystick1.add_listener(self._joylistener)
-        if joystick2:
-            joystick2.add_listener(self._joylistener)
+        self.climber = climber
+        self.intake = intake
+        self.shooter = shooter
 
-    def _joylistener(self, sensor, state_id, datum):
-        if sensor in (self.joystick1, self.joystick2) and state_id in ('x_axis', 'y_axis'):
-            power = self.joystick1.y_axis
-            turnval = self.joystick2.x_axis if self.joystick2 else self.joystick1.x_axis
-            # get turn value from joystick2 if it exists, else get it from joystick1
-            self.dt.set_dt_output(power + turnval,
-                                  power - turnval)
+        self.joystick1.add_listener(self._joy1listener)
+        self.joystick2.add_listener(self._joy2listener)
 
-class TankDriveController:
+    def _joy1listener(self, sensor, state_id, datum):
+        if state_id == 'button4':
+            if datum:
+                self.climber.raiseclimber()
+            else:
+                self.climber.lowerclimber()
+
+
+    def _joy2listener(self, sensor, state_id, datum):
+        pass
+
+
+class XboxMechController:
     """
     Class for controlling DT in tank drive mode with two joysticks.
     """

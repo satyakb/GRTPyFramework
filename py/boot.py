@@ -1,5 +1,6 @@
 import sys
 
+
 class RollbackImporter:
     def __init__(self):
         "Creates an instance and installs as the global importer"
@@ -18,6 +19,7 @@ class RollbackImporter:
                     del sys.modules[modname].__dict__[v]
                 del sys.modules[modname]
 
+
 def main():
     #print(sys.path)
     if "/c/py" not in sys.path:
@@ -30,9 +32,9 @@ def main():
     import time
     #import runpy
 
+    robot = None
     while True:
         rollback = RollbackImporter()
-        robot = None
         try:
             print("Importing user code.")
             robot = __import__("robot")
@@ -43,9 +45,9 @@ def main():
             pass
         except:
             print("Exception in user code, type 'reboot' to restart:")
-            print("-"*60)
+            print("-" * 60)
             traceback.print_exc(file=sys.stdout)
-            print("-"*60)
+            print("-" * 60)
             return
 
         print("User code raised SystemExit; waiting 5 seconds before restart")
@@ -55,9 +57,7 @@ def main():
         rollback.uninstall()
         if robot is not None:
             del robot
-            robot = None
         gc.collect()
 
 if __name__ == "__main__":
     main()
-

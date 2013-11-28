@@ -37,4 +37,11 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+<<<<<<< HEAD
 /nbproject
+=======
+
+#Pesky Files
+py/grt/grt
+nbproject*
+>>>>>>> origin/2013MockBuildMechs
