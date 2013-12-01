@@ -1,29 +1,17 @@
+#Ball shooter for the mock build shop project, F period
 class Shooter:
-    def __init__(self, joystick, fly_motor1, fly_motor2, shootermotor, luna):
-        self.joystick = joystick
-        self.fly_motor1 = fly_motor1
-        self.fly_motor2 = fly_motor2
-        self.shootermotor = shootermotor
-        self.luna = luna
-        self.joystick.add_listener(self.flywheel_listener)
-        self.joystick.add_listener(self.luna_listener)
-        self.joystick.add_listener(self.shootermotor_listener)
-
-    def flywheel_listener(self, source, id, datum):
-        if id == 'button3':
-            if datum:
-                self.fly_motor1.Set(1)
-                self.fly_motor2.Set(1)
-            else:
-                self.fly_motor1.Set(0)
-                self.fly_motor2.Set(0)
-
-    def luna_listener(self, source, id, datum):
-        if id == 'trigger' and self.joystick.button3:
-            self.luna.Set(datum)
-        if id == 'trigger' and not self.joystick.button3:
-            self.luna.Set(False)
-
-    def shootermotor_listener(self, source, id, datum):
-        if id == 'y_axis':
-            self.shootermotor.Set(-datum)
+    '''
+    The shooter mechanism consists of two motors (fly1, fly2)
+    and an actuator (act)
+    '''
+    def __init__(self, fly1, fly2, act):
+        self.fly1 = fly1
+        self.fly2 = fly2
+        self.act = act
+    def set_speed(self, speed)
+        self.fly1.Set(speed)
+        self.fly2.Set(speed)
+    def shoot(self):
+        self.act.Set(True)
+    def retract(self):
+        self.act.Set(False)
