@@ -46,16 +46,6 @@ compressor.Start()
 shooter = Shooter(fly1, fly2, act)
 pickup = Pickup(epmotor)
 
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
 """
 Config File for Robot
 
