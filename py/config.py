@@ -13,7 +13,7 @@ from grt.mechanism.drivetrain import DriveTrain
 from grt.mechanism.drivecontroller import ArcadeDriveController
 from grt.mechanism.pickup import Pickup
 from grt.mechanism.shooter import Shooter
-from grt.mechanism.mechcontroller import Attack3Mechcontroller
+from grt.mechanism.mechcontroller import Attack3MechController
 from grt.mechanism.mechcontroller import XboxMechController
 # Joysticks
 lstick = Attack3Joystick(1)
@@ -34,12 +34,12 @@ rrm = wpilib.Talon(2)
 leftShift = wpilib.Solenoid(5)
 rightShift = wpilib.Solenoid(6)
 
-fly1 = wplib.Talon(9)
-fly2 = wplib.Talon(10)
+fly1 = wpilib.Talon(9)
+fly2 = wpilib.Talon(10)
 
-epmotor = wplib.Victor(5)
+epmotor = wpilib.Victor(5)
 
-act = wplib.Solenoid(8)
+act = wpilib.Solenoid(8)
 compressor = wpilib.Compressor(1, 1)
 compressor.Start()
 
