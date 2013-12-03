@@ -19,6 +19,7 @@ class MyRobot(wpilib.SimpleRobot):
             CheckRestart()
             wpilib.Wait(0.01)
 
+
     def OperatorControl(self):
         dog = self.GetWatchdog()
         dog.SetEnabled(True)
@@ -29,7 +30,7 @@ class MyRobot(wpilib.SimpleRobot):
             CheckRestart()
 
             # Motor control
-	     
+
             sp.poll()
 	     
 
