@@ -29,7 +29,7 @@ left3 = wpilib.Talon(3)
 
 right1 = wpilib.Talon(4)
 right2 = wpilib.Talon(5)
-right3 = wpilib.Talon(10)
+right3 = wpilib.Talon(9)
 
 lshifter = wpilib.Solenoid(1)
 #rshifter = wpilib.Solenoid(1)
