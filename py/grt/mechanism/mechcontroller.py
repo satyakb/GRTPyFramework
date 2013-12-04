@@ -38,6 +38,33 @@ class Attack3MechController:
         if state_id == 'button3':
             self.shooter.set_speed(1)
 
+class Attack3MechControllerG:
+
+    def __init__(self, joystick1, joystick2, pickup, gshooter):
+        """
+        Initialize arcade drive controller with a DT and up to two joysticks.
+        """
+        self.joystick1 = joystick1
+        self.joystick2 = joystick2
+        self.pickup = pickup
+        self.gshooter = gshooter
+
+        self.joystick2.add_listener(self._joylistener1)
+        self.joystick2.add_listener(self._joylistener2)
+
+    def _joylistener1(self, sensor, state_id, datum):
+        if state_id == 'trigger' and datum:
+            self.gshooter.fire()
+        elif state_id == 'trigger' and not datum:
+            self.gshooter.unfire()
+
+    def _joylistener2(self, sensor, state_id, datum):
+        if state_id == 'button3':
+            if datum:
+                self.pickup.startep()
+            else:
+                self.pickup.endep()
+
 
 class XboxMechController:
     """

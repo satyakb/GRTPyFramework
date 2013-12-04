@@ -9,6 +9,6 @@ class Pickup:
     def startep(self):
         self.motor.Set(1)
     def endep(self):
-        self.motor.Set(-1)
+        self.motor.Set(0)
 
     
