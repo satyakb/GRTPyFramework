@@ -36,39 +36,25 @@ rrm = wpilib.Talon(2)
 leftShift = wpilib.Solenoid(5)
 rightShift = wpilib.Solenoid(6)
 
-fly1 = wpilib.Talon(9)
-fly2 = wpilib.Talon(10)
-
 # F Period
-# epmotor = wpilib.Victor(5)
-
-# act = wpilib.Solenoid(8)
-
-# G Period
 epmotor = wpilib.Victor(5)
-shooter = wpilib.Solenoid(8)
+fly1 = wpilib.Victor(6)
+fly2 = wpilib.Victor(7)
+
+act = wpilib.Solenoid(8)
 
 compressor = wpilib.Compressor(1, 1)
 compressor.Start()
 
 # F Period
-# shooter = Shooter(fly1, fly2, act)
-# pickup = Pickup(epmotor)
-
-# G Period
+shooter = Shooter(fly1, fly2, act)
 pickup = Pickup(epmotor)
-gshooter = GShooter(shooter)
-
 
 dt = DriveTrain(lfm, rfm, lrm, rrm, leftShift, rightShift)
 
 dt.set_scale_factors(1, -1, 1, -1)
 # F Period
-# xc = XboxMechController(dt, lstick, rstick, pickup, shooter)
+xc = XboxMechController(dt, lstick, rstick, pickup, shooter)
 # atc = Attack3MechController(lstick, rstick, pickup, shooter)
-
-# G Period
-atcg = Attack3MechControllerG(lstick, rstick, pickup, gshooter)
-
 
 ac = ArcadeDriveController(dt, lstick)
