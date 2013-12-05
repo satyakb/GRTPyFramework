@@ -25,18 +25,18 @@ class Attack3MechController:
     def _joy1listener(self, sensor, state_id, datum):
         if state_id == 'button2':
             if datum:
-                self.pickpup.startep()
+                self.pickup.startep()
             else:
                 self.pickup.endep()
 
 
-    def _joy2listener(self, sensor, state_id, datum):
+    def _joy2listener(self, sensor, state_id, datum): 
+        if state_id == 'button3':
+            self.shooter.set_speed(1)
         if state_id == 'trigger' and self.joystick2.button3:
             self.shooter.fire()
         if state_id == 'trigger' and not self.joystick2.button3:
             self.shooter.retract()
-        if state_id == 'button3':
-            self.shooter.set_speed(1)
 
 class Attack3MechControllerG:
 
