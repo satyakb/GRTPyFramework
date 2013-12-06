@@ -106,12 +106,12 @@ class XboxMechController:
             self.shooter.fire()
         if state_id == 'r_shoulder' and not self.l_shoulder:
             slef.shooter.retract()
-        if state_id == 'x_button':
+        if state_id == 'x_button' and not self.a_button:
             if datum:
                 self.pickup.startep()
             else:
                 self.pickup.endep()
-        if state_id == 'a_button':
+        if state_id == 'a_button' and not self.x_button:
             if datum:
                 self.pickup.reverse()
             else:
