@@ -29,19 +29,17 @@ left3 = wpilib.Talon(3)
 
 right1 = wpilib.Talon(4)
 right2 = wpilib.Talon(5)
-right3 = wpilib.Talon(9)
+right3 = wpilib.Talon(7)
 
-lshifter = wpilib.Solenoid(1)
-#rshifter = wpilib.Solenoid(1)
+shifter = wpilib.Solenoid(1)
 
 dt =  DriveTrain(left1, right1, left2, right2, left3, right3)
 dt.set_scale_factors(1, -1, 1, -1, 1, -1)
 ac = ArcadeDriveController(dt, lstick)
 
 def shift_listener(sensor, state_id, datum):
-	if state_id == 'trigger' and datum:
-		lshifter.Set(not lshifter.Get())
-		#rshifter.Set(datum)
+    if state_id == 'trigger' and datum:
+        shifter.Set(not shifter.Get())
 
 lstick.add_listener(shift_listener)
 
