@@ -23,9 +23,19 @@ class Attack3MechController:
         self.joystick2.add_listener(self._joy2listener)
 
     def _joy1listener(self, sensor, state_id, datum):
-        if state_id == 'button2':
+        '''
+        Joystick controls EP belts, which can be run either
+        forward or backward.
+        If both are pressed, nothing happens.
+        '''
+        if state_id == 'button2' and not self.joystick1.button5:
             if datum:
                 self.pickup.startep()
+            else:
+                self.pickup.endep()
+        if state_id == 'button5' and not self.joystick1.button2:
+            if datum:
+                self.pickup.reverse()
             else:
                 self.pickup.endep()
 
@@ -87,18 +97,22 @@ class XboxMechController:
         if sensor in (self.joystick1, self.joystick2) and state_id in ('x_axis', 'y_axis'):
             self.dt.set_dt_output(self.l_joystick.y_axis,
                                   self.r_joystick.y_axis)
-        if state_id == 'r_shoulder' and self.l_shoulder:
-            self.shooter.fire()
-        if state_id == 'r_shoulder' and not self.l_shoulder:
-            slef.shooter.retract()
         if state_id == 'l_shoulder':
             if datum:
                 self.shooter.set_speed(1)
             else:
                 self.shooter.set_speed(0)
+        if state_id == 'r_shoulder' and self.l_shoulder:
+            self.shooter.fire()
+        if state_id == 'r_shoulder' and not self.l_shoulder:
+            slef.shooter.retract()
         if state_id == 'x_button':
             if datum:
                 self.pickup.startep()
             else:
                 self.pickup.endep()
-
+        if state_id == 'a_button':
+            if datum:
+                self.pickup.reverse()
+            else:
+                self.pickup.endep()

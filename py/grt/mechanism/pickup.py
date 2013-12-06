@@ -8,6 +8,8 @@ class Pickup:
         self.motor = motor
     def startep(self):
         self.motor.Set(1)
+    def reverse(self):
+        self.motor.Set(-1)
     def endep(self):
         self.motor.Set(0)
 
