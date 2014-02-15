@@ -4,7 +4,7 @@ Config File for Robot
 #TODO: Setup for Constants File
 """
 
-__author__ = "Sidd Karamcheti"
+__author__ = "Sidd Karamcheti, Satya Bodduluri"
 
 import wpilib
 from grt.sensors.attack_joystick import Attack3Joystick
